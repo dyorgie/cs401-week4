@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->max(30)->comment('tagname');
+            $table->string('slug')->unique()->comment('URL-friendly version of the tag name'); // Adding a comment for clarity
             $table->timestamps();
         });
     }

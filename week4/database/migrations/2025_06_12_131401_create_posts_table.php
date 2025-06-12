@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title')->comment('Post title'); // Adding a comment for clarity
+            $table->text('content');
+            $table->string('slug')->unique();
+            $table->timestamp('publication_date')->nullable()->comment('Date when the post will be published');
+            $table->timestamp('lastmodified')->nullable()->comment('Last modified date of the post');
+            $table->string('status')->default('draft')->comment('Status of the post (draft, published, archived)');
+            $table->string('featured_image')->max(1)->nullable()->comment('URL of the featured image for the post');
+            $table->integer('view_count')->default(0)->comment('Number of views the post has received');
         });
     }
 
